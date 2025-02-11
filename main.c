@@ -10,7 +10,8 @@ int main()
 	struct sockaddr_in client_addr;
 
 	server_fd = socket(AF_INET, SOCK_STREAM, 0);
-	if (server_fd == -1) {
+	if (server_fd == -1)
+	{
 		printf("Socket creation failed: %s...\n", strerror(errno));
 		return 1;
 	}
@@ -20,13 +21,15 @@ int main()
 									 .sin_addr = { htonl(INADDR_ANY) },
 									};
 
-	if (bind(server_fd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) != 0) {
+	if (bind(server_fd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) != 0)
+	{
 		printf("Bind failed: %s \n", strerror(errno));
 		return 1;
 	}
 
 	int connection_backlog = 10;
-	if (listen(server_fd, connection_backlog) != 0) {
+	if (listen(server_fd, connection_backlog) != 0)
+	{
 		printf("Listen failed: %s \n", strerror(errno));
 		return 1;
 	}
@@ -34,7 +37,8 @@ int main()
 	printf("Waiting for a client to connect...\n");
 	client_addr_len = sizeof(client_addr);
 
-	while(1){
+	while(1)
+	{
 		int client_fd = accept(server_fd, (struct sockaddr *) &client_addr, (socklen_t * restrict)&client_addr_len);
 
 		if(client_fd == -1)

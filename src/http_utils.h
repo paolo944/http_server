@@ -4,6 +4,6 @@
 #include <unistd.h>
 #include "http_core.h"
 
-void *handle_connection(void *pclient_socket);
+void *handle_connection(void *arg);
 
 #endif

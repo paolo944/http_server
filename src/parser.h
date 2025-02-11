@@ -15,6 +15,4 @@ char *getHeaderAttribute(const char buffer[BUFFER_SIZE], const char *attribute);
 
 char *getBody(const char buffer[BUFFER_SIZE]);
 
-char *parse_url(const char *url);
-
 #endif

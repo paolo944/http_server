@@ -1,7 +1,7 @@
 #include "routing.h"
 #include "hash_table.h"
 
-void route(const char buffer[BUFFER_SIZE], int client_socket, HashTable table)
+void route(const char buffer[BUFFER_SIZE], int client_socket, HashTable *table)
 {
 	//Get the endpoint in the hashtable and use the fonction
 	char *endpoint = get_endpoint(buffer);

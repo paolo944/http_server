@@ -10,7 +10,13 @@
 #include <errno.h>
 #include <unistd.h>
 #include <pthread.h>
+#include "hash_table.h"
 
 #define BUFFER_SIZE 1024
+
+typedef struct {
+    int client_socket;
+    HashTable *table;
+}ThreadArgs;
 
 #endif

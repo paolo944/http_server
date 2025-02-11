@@ -3,6 +3,6 @@
 
 #include "http_core.h"
 
-void route(const char buffer[BUFFER_SIZE], int client_socket);
+void route(const char buffer[BUFFER_SIZE], int client_socket, HashTable *table);
 
 #endif

@@ -1,9 +1,11 @@
 #include "http_utils.h"
 #include "routing.h"
 
-void *handle_connection(void *pclient_socket)
+void *handle_connection(void *arg)
 {
-	int client_socket = *((int *)pclient_socket);
+	ThreadArgs *args = (ThreadArgs*)arg;
+	int client_socket = args->client_socket;
+	HashTable *table = args->table;
 
 	char buffer[BUFFER_SIZE] = {0};	
 
@@ -14,7 +16,7 @@ void *handle_connection(void *pclient_socket)
 		return NULL;
 	}
 
-	route(buffer, client_socket);
+	route(buffer, client_socket, table);
 
 	return NULL;
 }
