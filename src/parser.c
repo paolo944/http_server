@@ -3,7 +3,7 @@
 char *getMethod(const char buffer[BUFFER_SIZE])
 {
     const char *end_method = strstr(buffer, " ");
-	size_t method_len = end_method;
+	size_t method_len = end_method - buffer;
 
 	char *method = (char*)malloc((method_len + 1)*sizeof(char));
     if(method == NULL)
@@ -37,8 +37,10 @@ char *getURL(const char buffer[BUFFER_SIZE])
 
 char *get_endpoint(const char buffer[BUFFER_SIZE])
 {
-    const char *start_endpoint = strstr(buffer, "/");
-	const char *end_endpoint = strstr(start_endpoint, "/");
+    const char *start_endpoint = strstr(buffer, "/") + 1;
+	const char *first_end = strstr(start_endpoint, "/");
+    const char *second_end = strstr(start_endpoint, " H");
+    const char *end_endpoint = (first_end - start_endpoint) < (second_end - start_endpoint) ? first_end : second_end;
 	size_t endpoint_len = end_endpoint - start_endpoint;
 
 	char *endpoint = (char*)malloc((endpoint_len + 1)*sizeof(char));
@@ -108,10 +110,10 @@ char *getHeaderAttribute(const char buffer[BUFFER_SIZE], const char *attribute)
     return header_attribute;
 }
 
-char *getBody(const const char buffer[BUFFER_SIZE])
+char *getBody(const char buffer[BUFFER_SIZE])
 {
     const char *start_body = strstr(buffer, "\r\n\r\n") + 4;
-	const char *end_body = strlen(buffer);
+	const char *end_body = buffer + strlen(buffer);
 
     if(end_body != start_body)
     {

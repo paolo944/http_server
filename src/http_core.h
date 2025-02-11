@@ -19,4 +19,6 @@ typedef struct {
     HashTable *table;
 }ThreadArgs;
 
+void launch_server(HashTable *table);
+
 #endif
