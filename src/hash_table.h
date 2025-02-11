@@ -3,7 +3,7 @@
 
 #define TABLE_SIZE 10
 
-typedef void (*FunctionPointer)();
+typedef void (*FunctionPointer)(char *buffer);
 
 typedef struct {
     char *key;

@@ -6,7 +6,7 @@ unsigned int hashFunction(const char *key)
 {
     unsigned int hash = 0;
     while (*key) {
-        hash = (hash * 31) + *key++; // Une simple fonction de hachage
+        hash = (hash * 31) + *key++;
     }
     return hash % TABLE_SIZE;
 }

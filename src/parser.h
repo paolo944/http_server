@@ -7,10 +7,14 @@ char *getMethod(const char buffer[BUFFER_SIZE]);
 
 char *getURL(const char buffer[BUFFER_SIZE]);
 
+char *get_endpoint(const char buffer[BUFFER_SIZE]);
+
 char *getHTTPVersion(const char buffer[BUFFER_SIZE]);
 
 char *getHeaderAttribute(const char buffer[BUFFER_SIZE], const char *attribute);
 
-char *getBody(const const char buffer[BUFFER_SIZE]);
+char *getBody(const char buffer[BUFFER_SIZE]);
+
+char *parse_url(const char *url);
 
 #endif

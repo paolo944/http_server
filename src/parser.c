@@ -4,7 +4,14 @@ char *getMethod(const char buffer[BUFFER_SIZE])
 {
     const char *end_method = strstr(buffer, " ");
 	size_t method_len = end_method;
+
 	char *method = (char*)malloc((method_len + 1)*sizeof(char));
+    if(method == NULL)
+    {
+        printf("Erreur pendant l'allocation\n");
+        return NULL;
+    }
+    
 	strncpy(method, buffer, method_len);
 	method[method_len] = '\0';
 	return method;
@@ -15,10 +22,35 @@ char *getURL(const char buffer[BUFFER_SIZE])
     const char *start_url = strstr(buffer, "/");
 	const char *end_url = strstr(buffer, " H");
 	size_t url_len = end_url - start_url;
+
 	char *url = (char*)malloc((url_len + 1)*sizeof(char));
+    if(url == NULL)
+    {
+        printf("Erreur pendant l'allocation\n");
+        return NULL;
+    }
+
 	strncpy(url, start_url, url_len);
 	url[url_len] = '\0';
 	return url;
+}
+
+char *get_endpoint(const char buffer[BUFFER_SIZE])
+{
+    const char *start_endpoint = strstr(buffer, "/");
+	const char *end_endpoint = strstr(start_endpoint, "/");
+	size_t endpoint_len = end_endpoint - start_endpoint;
+
+	char *endpoint = (char*)malloc((endpoint_len + 1)*sizeof(char));
+    if(endpoint == NULL)
+    {
+        printf("Erreur pendant l'allocation\n");
+        return NULL;
+    }
+
+	strncpy(endpoint, start_endpoint, endpoint_len);
+	endpoint[endpoint_len] = '\0';
+	return endpoint;
 }
 
 char *getHTTPVersion(const char buffer[BUFFER_SIZE])
@@ -26,7 +58,14 @@ char *getHTTPVersion(const char buffer[BUFFER_SIZE])
     const char *start_http = strstr(buffer, "H");
 	const char *end_http = strstr(buffer, "\n");
 	size_t http_len = end_http - start_http;
+
 	char *http = (char*)malloc((http_len + 1)*sizeof(char));
+    if(http == NULL)
+    {
+        printf("Erreur pendant l'allocation\n");
+        return NULL;
+    }
+
 	strncpy(http, start_http, http_len);
 	http[http_len] = '\0';
 	return http;
@@ -57,6 +96,12 @@ char *getHeaderAttribute(const char buffer[BUFFER_SIZE], const char *attribute)
 
 	char *header_attribute = (char*)malloc((ua_len + 1)*sizeof(char));
 
+    if(header_attribute == NULL)
+    {
+        printf("Erreur pendant l'allocation\n");
+        return NULL;
+    }
+
     strncpy(header_attribute, ua_start, ua_len);
     header_attribute[ua_len] = '\0';
     
@@ -67,12 +112,21 @@ char *getBody(const const char buffer[BUFFER_SIZE])
 {
     const char *start_body = strstr(buffer, "\r\n\r\n") + 4;
 	const char *end_body = strlen(buffer);
+
     if(end_body != start_body)
     {
         return NULL;
     }
+
 	size_t body_len = end_body - start_body;
+
 	char *body = (char*)malloc((body_len + 1)*sizeof(char));
+    if(body == NULL)
+    {
+        printf("Erreur pendant l'allocation\n");
+        return NULL;
+    }
+
 	strncpy(body, start_body, body_len);
 	body[body_len] = '\0';
 	return body;
